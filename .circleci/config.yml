@@ -1,7 +1,12 @@
-version: 2.1
+jobs:
+  build:
+    docker:
+      - image: 'circleci/node:10'
+    steps:
+      - run: echo "hi"
+      - webhook/notify:
+          endpoint: 'https://heuristic-bose-c0d64f.netlify.app/.netlify/functions/hello'
+    working_directory: ~/repo
 orbs:
-  node: circleci/node@3.0.0
-workflows:
-  node-tests:
-    jobs:
-      - node/test
+  webhook: eddiewebb/webhook@volatile
+version: 2.1
